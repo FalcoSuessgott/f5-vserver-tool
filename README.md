@@ -1,18 +1,10 @@
 # f5-vserver-tool
-
-<<<<<<< HEAD
-# Dependencies
-
-# Installation
-
 # Usage
 Utitlity written in Python for displaying virtual server and their respective pools and nodes. Can be used for changing the default pool for a virtual server. Also it prints out the current sync status of a specified device group. 
 
 # Getting Started
-=======
 Small python tool for displaying virtual server and their respective pools and nodes, changing the pool of virtual server. Also it can be used to print out the current sync status of a device group. Please see the Note under Usage to understand config file usage and commandline option passing
 ## Getting Started
->>>>>>> acd20085f072d01292f3015b79b88557c1fd0df9
 
 ### Dependencies 
 
@@ -22,7 +14,7 @@ Small python tool for displaying virtual server and their respective pools and n
 [Python F5 icontrol-rest](https://github.com/F5Networks/f5-icontrol-rest-python)
 (>= 1.3.9)
 
-### Installing
+### Instalation
 ```
 git clone https://github.com/FalcoSuessgott/f5-vserver-tool.git 
 ```
