@@ -1,16 +1,6 @@
 # f5-vserver-tool
 
-
-# Dependencies
-
-# Installation
-
-# Usage
-
-=======
-Utitlity written in Python for displaying virtual server and their respective pools and nodes. Can be used for changing the default pool for a virtual server. Also it prints out the current sync status of a specified device group. 
-
-# Getting Started
+## Getting Started
 
 ### Dependencies 
 
@@ -149,6 +139,3 @@ password	= "password"
 devicegroup	= "devicegroup"
 loadbalancer	= "fqdn"
 ```
-
-
-
