@@ -1,8 +1,8 @@
-#!/usr/bin/python 
+#!/usr/bin/python
 #
 # Commandline utility to execute specific operations on biotronik f5 loadbalancer
 #
-# Autor: morelly.tom@biotronik.com 
+# Autor: Tom Morelly
 # Date:  11.10.2018
 #
 
@@ -28,7 +28,7 @@ loadbalancer	= "fqdn"
 """
 
 def parseArgs():
-	""" Argument parser """ 
+	""" Argument parser """
         parser = argparse.ArgumentParser(description="Lists vserver, pool and nodes of from specified f5 big ip systems.\n"
 					+ "Assigns a default pool to a specified vserver.\n"
 					+ "Prints out the current sync-status of a device group.\n"
@@ -37,7 +37,7 @@ def parseArgs():
 					+ "If options are not present, either as configfile or as commandline option"
 					+ " the programm will exit.",formatter_class=argparse.RawTextHelpFormatter)
 
-		
+
 	# C
         parser.add_argument("-c", "--config", dest="config",action="store",
 			help="Path to configfile. Use -m to print sample config file."
@@ -63,7 +63,7 @@ def parseArgs():
         parser.add_argument("-s", "--set", dest="setPool", action="store",nargs=2,
                         help="Assigns a default pool to specified vserver"
 			+ "\nUsage: --set VSERVER POOL")
-	
+
 	# SHOW SYNC STATUS
 	parser.add_argument("--show-sync-status", dest="syncStatus", action="store_true",
 			help="Prints the sync-status of the specified device group.")
@@ -115,7 +115,7 @@ def parseArgs():
 		print SAMPLE_CONFIG
 		sys.exit(0)
 
-	# configfile 
+	# configfile
 	if parser.config:
 		configfile = parser.config
 
@@ -169,7 +169,7 @@ def parseArgs():
                         devicegroup = parser.devicegroup
 	else:
 		devicegroup = devicegroupValue
-		
+
 	# Auth
 	auth(loadbalancer, user, password)
 
@@ -177,14 +177,14 @@ def parseArgs():
 	# ACTION OPTIONS
 	################
 
-	# list all	
+	# list all
 	if parser.listAll:
 		listAll()
 
 	# list pools
 	if parser.listPools:
 		listPools()
-	
+
 	# list nodes
 	if parser.listNodes:
 		listNodes()
@@ -192,7 +192,7 @@ def parseArgs():
 	# list vs
 	if parser.listVirtualServer:
 		listVirtualServer()
-	# set 
+	# set
 	if parser.setPool:
 		setPool(parser.setPool)
 
@@ -214,7 +214,7 @@ def readConfig(config):
 		global loadbalancerValue
                 loadbalancerValue = config.get('BASIC', 'loadbalancer')
 		loadbalancerValue = loadbalancerValue.strip('"')
-	
+
 		global devicegroupValue
                 devicegroupValue = config.get('BASIC', 'devicegroup')
 		devicegroupValue = devicegroupValue.strip('"')
@@ -244,20 +244,20 @@ def configHandler(configfile):
 
 def setPool(options):
 	""" Sets a specific pool to a specified vserver"""
-	try:	
+	try:
 		poolExists       	= mgmt.tm.ltm.pools.pool.exists(name=options[1])
                 virtualServerExists     = mgmt.tm.ltm.virtuals.virtual.exists(name=options[0])
-	
+
 		if not virtualServerExists:
 			print "\"%s\" does not exist.\nExiting." %(options[0])
 			sys.exit(1)
 		if not poolExists:
                         print "\"%s\" does not exist.\nExiting." %(options[1])
                         sys.exit(1)
-		
+
 		print "Changing pool for \"%s\" to \"%s\"" %(options[0], options[1])
 		virtualServer           = mgmt.tm.ltm.virtuals.virtual.load(name=options[0])
-		params = {'pool': options[1]}	
+		params = {'pool': options[1]}
 		virtualServer.update(**params)
 		forceSync()
 	        sys.exit(0)
@@ -327,10 +327,10 @@ def listPools():
 		for pool in pools:
 			 print pool.name
                 sys.exit(0)
-        except Exception as e:  
+        except Exception as e:
                 print e
                 sys.exit(1)
- 
+
 def listVirtualServer():
 	""" Get a list of all virtual servers and their details """
 	try:
@@ -339,7 +339,7 @@ def listVirtualServer():
 		for vs in virtualServer:
 			print vs.name
                 sys.exit(0)
-        except Exception as e:  
+        except Exception as e:
                 print e
                 sys.exit(1)
 
@@ -352,7 +352,7 @@ def listNodes():
                         for member in pool.members_s.get_collection():
                                 print member.name
                 sys.exit(0)
-        except Exception as e:  
+        except Exception as e:
                 print e
                 sys.exit(1)
 
