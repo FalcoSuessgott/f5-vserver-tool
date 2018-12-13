@@ -60,7 +60,7 @@ Note:
 List virtual server and their assigned pools and their respective nodes
 
 ```
-[user@host ~]$ loadbalancer -l
+[user@host ~]$ f5-vserver-tool.py -l
 Password:
 Virtual Server               Pool               Pool member
 xxx-8010                     xxxx               1.1.1.1:100, 1.1.1.1:200
@@ -71,7 +71,7 @@ xxx-8020                     xxxx               1.1.1.1:100, 1.1.1.1:200
 
 List all virtual server
 ```
-[user@host ~]$ loadbalancer --list-vserver
+[user@host ~]$ f5-vserver-tool.py --list-vserver
 Password:
 vserver-1
 vserver-2
@@ -81,7 +81,7 @@ vserver-3
 
 List all pools
 ```
-[user@host ~]$ loadbalancer --list-pools
+[user@host ~]$ f5-vserver-tool.py --list-pools
 Password:
 pool-1
 pool-2
@@ -91,7 +91,7 @@ pool-3
 
 List all nodes
 ```
-[user@host ~]$ loadbalancer --list-nodes
+[user@host ~]$ f5-vserver-tool.py --list-nodes
 Password:
 node1
 node2
@@ -101,7 +101,7 @@ node3
 
 List all virtual server
 ```
-[user@host ~]$ loadbalancer --list-vserver
+[user@host ~]$ f5-vserver-tool.py --list-vserver
 Password:
 vserver-1
 vserver-2
@@ -111,7 +111,7 @@ vserver-3
 
 Print out sync-status 
 ```
-[user@host ~]$ loadbalancer --show-sync-status
+[user@host ~]$ f5-vserver-tool.py --show-sync-status
 Password: 
 deviceGroup is currently In Sync
 
@@ -121,7 +121,7 @@ deviceGroup is currently In Sync
 
 Set assign pool1 to vserver1
 ```
-[user@host ~]$ loadbalancer -s vserver1 pool1
+[user@host ~]$ f5-vserver-tool.py -s vserver1 pool1
 Password: 
 Changing pool for "vserver1" to "pool1"
 Synchronizing new configuration to device group "devicegroup"
@@ -130,7 +130,7 @@ devicegroup is In Sync
 
 #### Print out sample config file
 ```
-[user@host ~]$ loadbalancer -m
+[user@host ~]$ f5-vserver-tool.py -m
 [AUTH]
 user		= "user"
 password	= "password"
