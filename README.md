@@ -1,5 +1,8 @@
 # f5-vserver-tool
-Small python tool for displaying virtual server and their respective pools and nodes, changing the pool of virtual server. Also it can be used to print out the current sync status of a device group. Please see the Note under Usage to understand config file usage and commandline option passing
+Functions:
+* list all virtual server its pools and their members of a device group
+* print out the sync status of a device group
+* assign pools to specfied virtual server
 ## Getting Started
 
 ### Dependencies 
@@ -15,44 +18,36 @@ Small python tool for displaying virtual server and their respective pools and n
 git clone https://github.com/FalcoSuessgott/f5-vserver-tool.git 
 ```
 
-or get the rpm under releases
+or download the rpm under [releases](https://github.com/FalcoSuessgott/f5-vserver-tool/releases) and then run:
 ```
 sudo yum localinstall f5-server-tool
 ```
 
 ### Prerequisites
-In order to use this tool you will need to provide the config file some information
+In order to use this tool you either need to set up `/etc/loadbalancer.conf`:
 
+**/etc/loadbalancer.conf**
 ```
-cat /etc/loadbalancer.conf
-# [AUTH]
-# User      = Name of the user that is used to connect to the loadbalancer
-# Password	= Password of the loadbalancer that is used while authenticate to the loadbalancer
-
 [AUTH]
-User		  = ""
-Password	= ""
-
-# [BASIC]
-# DeviceGroup	  = Name of the Device Group to which the loadbalancer are assigned to
-# LoadbalancerX	= FQDN of respective the loadbalancer
+user      = 
+password	 = 
 
 [BASIC]
-DeviceGroup	  = ""
-Loadbalancer	= ""
+devicegroup	 =
+loadbalancer = 
 ```
+
+Or you pass the parameter as commandline arguments.
+You can override the configfile parameter with commandline arguments.
 
 ### Usage
-If filled in successful you can use it with
-
 ```
-f5-server-tool  [--config / -c ] CONFIGFILE [--user/ -u ] USER [--password / -p] Password [--devicegroup / -dg] DEVICEGROUP [--loadbalancer / -lb ] LOADBALANCER [--list] [--list-vserver] [--list-pools] [--list-nodes] [
+f5-server-tool.py  [--config / -c ] CONFIGFILE [--user/ -u ] USER [--password / -p] Password [--devicegroup / -dg] DEVICEGROUP [--loadbalancer / -lb ] LOADBALANCER [--list] [--list-vserver] [--list-pools] [--list-nodes] [
 ```
 
-Note:
- - If no configfile [--config / -c] is specified when the tool is called. The default config under /etc/loadbalancer.conf is used.
- - Config parameters that are passed as options ( [--user/ --password / --loadbalancer / --devicegroup ] overwrite the information in the default config or the specified config file ([--config / -c]).
- - If no user is specified in the config file, the current user will be used and prompted for authentication
+**Note:**
+ * If no configfile parameter is specified, default location `/etc/loadbalancer.conf` is used.
+ * If no `user` and `password` values are specified in the configfile, the current user will be used and prompted for authentication.
 
 ### Example
 
@@ -118,10 +113,8 @@ deviceGroup is currently In Sync
 ```
 
 #### Configure vserver and their assigend pool
-
-Set assign pool1 to vserver1
 ```
-[user@host ~]$ f5-vserver-tool.py -s vserver1 pool1
+[user@host ~]$ f5-vserver-tool.py --set vserver1 pool1
 Password: 
 Changing pool for "vserver1" to "pool1"
 Synchronizing new configuration to device group "devicegroup"
