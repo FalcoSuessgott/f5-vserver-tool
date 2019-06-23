@@ -40,14 +40,9 @@ loadbalancer =
 Or you pass the parameter as commandline arguments.
 You can override the configfile parameter with commandline arguments.
 
-### Usage
-```
-f5-server-tool.py  [--config / -c ] CONFIGFILE [--user/ -u ] USER [--password / -p] Password [--devicegroup / -dg] DEVICEGROUP [--loadbalancer / -lb ] LOADBALANCER [--list] [--list-vserver] [--list-pools] [--list-nodes] [
-```
-
 **Note:**
  * If no configfile parameter is specified, default location `/etc/loadbalancer.conf` is used.
- * If no `user` and `password` values are specified in the configfile, the current user will be used and prompted for authentication.
+ * If no `user` and `password` values are specified in the configfile or passes as commandline arguments, the current user will be used and prompted for authentication.
 
 ### Example
 
